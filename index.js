@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const Database = require('./database.js');
+const DatabaseQueries = require('./database.js');
 
-const db = new Database(
+const db = new DatabaseQueries(
     {
         host: 'localhost',
         // MySQL username
@@ -28,7 +28,6 @@ async function userPrompt() {
                     'View all departments',
                     'View all roles',
                     'View all employees',
-                    'View employees by manager',
                     'Add a department',
                     'Add a role',
                     'Add an employee',
@@ -36,6 +35,7 @@ async function userPrompt() {
                     'Delete a department',
                     'Delete a role',
                     'Delete an employee',
+                    'View employees by manager',
                     'Exit',
                 ]
             }
@@ -45,11 +45,77 @@ async function userPrompt() {
             case 'View all departments':
                 const departments = await db.viewAllDepartments(connect);
                 console.table(departments);
+                await userPrompt();
                 break;
+            case 'View all roles':
+                const roles = await db.viewAllRoles(connect);
+                console.table(roles);
+                await userPrompt();
+                break;
+            case 'View all employees':
+                const employees = await db.viewAllEmployees(connect);
+                console.table(employees);
+                await userPrompt();
+                break;
+            case 'Add a department':
+                const { dept_name } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'dept_name',
+                        message: 'Enter the name of the new department',
+                        validate: deptInput => {
+                            if (deptInput) {
+                                return true;
+                            } else {
+                                console.log('Please enter a department name');
+                                return false;
+                            }
+                        }
+                    }
+                ]);
+
+                await db.addDepartment(connect, dept_name);
+                console.log('Department added successfully!');
+                await userPrompt();
+                break;
+                case 'Add a role':
+                    const { title, salary } = await inquirer.prompt([
+                        {
+                            type: 'input',
+                            name: 'title',
+                            message: 'Enter the name of the new role',
+                            validate: roleInput => {
+                                if (roleInput) {
+                                    return true;
+                                } else {
+                                    console.log('Please enter a role name');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            type: 'input',
+                            name: 'salary',
+                            message: 'Please enter the salary for this new role',
+                            validate: salaryInput => {
+                                const isValid = !isNaN(salaryInput) && parseFloat(salaryInput) >0;
+                                if (isValid) {
+                                    return true;
+                                } else {
+                                    console.log('Please enter a valid salary');
+                                    return false;
+                                }
+                            }   
+                        }
+                    ]);
+    
+                    await db.addRole(connect, title, salary);
+                    console.log('Role added successfully!');
+                    await userPrompt();
+                    break;    
             case 'Exit':
                 await connect.end();
                 break;
-            // ... handle other cases
         }
     } catch (error) {
         console.error('Error:', error.message);

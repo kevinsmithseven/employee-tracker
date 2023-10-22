@@ -1,6 +1,7 @@
 const mysql = require('mysql2/promise');
+const inquirer = require('inquirer');
 
-class Database {
+class DatabaseQueries {
     constructor(config) {
         this.config = config;
     };
@@ -13,7 +14,7 @@ class Database {
         try {
             const [results] = await connect.query('SELECT * FROM departments');
             return results;
-        }   catch (error) {
+        } catch (error) {
             throw new Error('Failed to retrieve departments');
         };
     };
@@ -22,7 +23,7 @@ class Database {
         try {
             const [results] = await connect.query('SELECT * FROM roles');
             return results;
-        }   catch (error) {
+        } catch (error) {
             throw new Error('Failed to retrieve roles');
         };
     };
@@ -31,11 +32,27 @@ class Database {
         try {
             const [results] = await connect.query('SELECT * FROM employees');
             return results;
-        }   catch (error) {
+        } catch (error) {
             throw new Error('Failed to retrieve employees');
         };
     };
+
+    async addDepartment(connect, dept_name) {
+        try {
+            const [results] = await connect.query('INSERT INTO departments (dept_name) VALUES (?)', [dept_name]);
+        } catch (error) {
+            throw new Error('Failed to add department')
+        }
+    }
+
+    async addRole(connect, title, salary) {
+        try {
+            const [results] = await connect.query('INSERT INTO roles (title, salary) VALUES (?, ?)', [title, salary]);
+        } catch (error) {
+            throw new Error('Failed to add role')
+        }
+    }
 };
 
 
-module.exports = Database;
+module.exports = DatabaseQueries;
