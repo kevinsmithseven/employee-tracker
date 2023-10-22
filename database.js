@@ -35,4 +35,7 @@ class Database {
             throw new Error('Failed to retrieve employees');
         };
     };
-}
+};
+
+
+module.exports = Database;
