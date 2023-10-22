@@ -43,7 +43,8 @@ async function userPrompt() {
 
         switch (userRequest.action) {
             case 'View all departments':
-                await viewAllDepartments(connect);
+                const departments = await db.viewAllDepartments(connect);
+                console.table(departments);
                 break;
             case 'Exit':
                 await connect.end();
