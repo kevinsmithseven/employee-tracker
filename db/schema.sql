@@ -34,3 +34,5 @@ CREATE TABLE employees (
     REFERENCES employees(id)
     ON DELETE SET NULL   -- Clearing manager reference if manager is deleted
 );
+
+SELECT DATABASE();

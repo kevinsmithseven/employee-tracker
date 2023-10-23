@@ -36,6 +36,8 @@ async function userPrompt() {
                     'Delete a role',
                     'Delete an employee',
                     'View employees by manager',
+                    'Update an employee manager',
+                    'View total budget of a department',
                     'Exit',
                 ]
             }
