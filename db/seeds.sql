@@ -26,13 +26,13 @@ INSERT INTO roles (title, salary, department_id) VALUES
 
 -- Insert initial employees
 INSERT INTO employees (first_name, last_name, manager_id, role_id) VALUES
-    ('Aria', 'Martinez', NULL, 1),
+   ('Aria', 'Martinez', NULL, 1),
     ('Dylan', 'Roberts', NULL, 2),
     ('Nina', 'Jenkins', NULL, 3),
     ('Dax', 'Thompson', NULL, 4),
-    ('Tess', 'Lynn', NULL, 5),  
-    ('Alan', 'Peterson', NULL, 6),
-    ('Chris', 'Walker', NULL, 7),  
-    ('Lynda', 'Baxter', NULL, 8),
-    ('Victor', 'Immanuel', NULL, 9),
-    ('Sara', 'Bennett', NULL, 10); 
+    ('Tess', 'Lynn', NULL, 5),
+    ('Alan', 'Peterson', 1, 6),  -- Managed by Aria Martinez
+    ('Chris', 'Walker', 2, 7),  -- Managed by Dylan Roberts
+    ('Lynda', 'Baxter', 3, 8),  -- Managed by Nina Jenkins
+    ('Victor', 'Immanuel', 4, 9), -- Managed by Dax Thompson
+    ('Sara', 'Bennett', 5, 10);  -- Managed by Tess Lynn

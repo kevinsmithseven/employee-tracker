@@ -17,7 +17,7 @@ CREATE TABLE roles (
     department_id INT,
     FOREIGN KEY (department_id)
     REFERENCES departments(id)
-    ON DELETE SET NULL
+    ON DELETE SET NULL -- Clearing department reference if department is deleted
 );
 
 -- Create employees table with reference to role id as foreign key
