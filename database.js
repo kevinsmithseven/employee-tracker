@@ -12,7 +12,7 @@ class DatabaseQueries {
 
     async viewAllDepartments(connect) {
         try {
-            const [results] = await connect.query('SELECT * FROM departments');
+            const [results] = await connect.query(`SELECT departments.id AS "Dept ID", dept_name AS "Department Name" FROM departments;`);
             return results;
         } catch (error) {
             throw new Error('Failed to retrieve departments');
@@ -21,7 +21,7 @@ class DatabaseQueries {
 
     async viewAllRoles(connect) {
         try {
-            const [results] = await connect.query('SELECT * FROM roles');
+            const [results] = await connect.query(`SELECT roles.id AS "Role ID", roles.title AS "Title", departments.dept_name AS "Dept Name", roles.salary AS Salary FROM roles JOIN departments ON departments.id = roles.department_id;`);
             return results;
         } catch (error) {
             throw new Error('Failed to retrieve roles');
@@ -30,7 +30,8 @@ class DatabaseQueries {
 
     async viewAllEmployees(connect) {
         try {
-            const [results] = await connect.query('SELECT * FROM employees');
+            const [results] = await connect.query(`SELECT employees.id AS "Employee ID", employees.first_name AS "First Name", employees.last_name AS "Last Name", roles.title AS "Title", departments.dept_name AS "Dept Name", roles.salary AS "Salary", employees.manager_id AS "Manager" FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.department_id = departments.id;`);
+            // TODO: Update to show manager name
             return results;
         } catch (error) {
             throw new Error('Failed to retrieve employees');
@@ -39,7 +40,7 @@ class DatabaseQueries {
 
     async addDepartment(connect, dept_name) {
         try {
-            const [results] = await connect.query('INSERT INTO departments (dept_name) VALUES (?)', [dept_name]);
+            const [results] = await connect.query(`INSERT INTO departments (dept_name) VALUES (?)`, [dept_name]);
         } catch (error) {
             throw new Error('Failed to add department')
         }

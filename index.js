@@ -1,7 +1,9 @@
+// Require necessary dependencies and packages
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const DatabaseQueries = require('./database.js');
 
+// Create new DataBaseQueries instance
 const db = new DatabaseQueries(
     {
         host: 'localhost',
@@ -13,12 +15,13 @@ const db = new DatabaseQueries(
     },
 );
 
-
+// Function for all user prompting and selections
 async function userPrompt() {
     const connect = await db.createConnection();
     console.log(`Connected to the employee_db database.`)
 
     try {
+        // Choices available to user in a list
         const userRequest = await inquirer.prompt([
             {
                 type: 'list',
@@ -32,17 +35,19 @@ async function userPrompt() {
                     'Add a role',
                     'Add an employee',
                     'Update an employee role',
-                    'Delete a department',
-                    'Delete a role',
-                    'Delete an employee',
-                    'View employees by manager',
-                    'Update an employee manager',
-                    'View total budget of a department',
+                    // 'Delete a department',
+                    // 'Delete a role',
+                    // 'Delete an employee',
+                    // 'View employees by manager',
+                    // 'Update an employee manager',
+                    // 'View employees by department,
+                    // 'View total budget of a department',
                     'Exit',
                 ]
             }
         ]);
 
+        // Switch statement conditional to handle user choice
         switch (userRequest.action) {
             case 'View all departments':
                 const departments = await db.viewAllDepartments(connect);
