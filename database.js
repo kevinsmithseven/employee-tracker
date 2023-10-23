@@ -45,13 +45,22 @@ class DatabaseQueries {
         }
     }
 
-    async addRole(connect, title, salary) {
+    async addRole(connect, title, salary, department_id) {
         try {
-            const [results] = await connect.query('INSERT INTO roles (title, salary) VALUES (?, ?)', [title, salary]);
+            const [results] = await connect.query('INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)', [title, salary, department_id]);
         } catch (error) {
             throw new Error('Failed to add role')
         }
     }
+
+    async getDepartmentsAndIDs(connect) {
+        try {
+            const [results] = await connect.query('SELECT id, dept_name FROM departments')
+            return results;
+        } catch (error) {
+            throw new Error('Failed to retrieve departments and ids');
+        }
+    };
 };
 
 

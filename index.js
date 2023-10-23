@@ -79,7 +79,12 @@ async function userPrompt() {
                 await userPrompt();
                 break;
                 case 'Add a role':
-                    const { title, salary } = await inquirer.prompt([
+                    const departmentIDs = await db.getDepartmentsAndIDs(connect);
+                    const departmentChoices = departmentIDs.map(dept => ({
+                        name: dept.dept_name,
+                        value: dept.id
+                    }));
+                    const { title, salary, department_id } = await inquirer.prompt([
                         {
                             type: 'input',
                             name: 'title',
@@ -106,10 +111,16 @@ async function userPrompt() {
                                     return false;
                                 }
                             }   
+                        },
+                        {
+                            type: 'list',
+                            name: 'department_id',
+                            message: 'Please select which department this role belongs to',
+                            choices: departmentChoices
                         }
                     ]);
     
-                    await db.addRole(connect, title, salary);
+                    await db.addRole(connect, title, salary, department_id);
                     console.log('Role added successfully!');
                     await userPrompt();
                     break;    
