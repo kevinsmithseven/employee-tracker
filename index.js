@@ -196,7 +196,6 @@ async function userPrompt() {
                     value: employees["Employee ID"]
                 }));
                 const rolesForUpdate = await db.viewAllRoles();
-                console.log('Roles for update:', rolesForUpdate);
                 const roleUpdateChoices = rolesForUpdate.map(roles => {
                     return {
                         name: roles['Title'],
@@ -217,7 +216,6 @@ async function userPrompt() {
                         choices: roleUpdateChoices
                     }
                 ])
-                console.log("Selected Employee ID:", employeeID, "Selected New Role ID:", newRoleID);
                 await db.updateRole(employeeID, newRoleID);
                 console.log(`Updated employee's role successfully`);
                 break;

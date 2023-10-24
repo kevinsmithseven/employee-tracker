@@ -23,7 +23,6 @@ class DatabaseQueries {
     async viewAllRoles() {
         try {
             const [results] = await this.connect.query(`SELECT roles.id AS "Role ID", roles.title AS "Title", departments.dept_name AS "Dept Name", roles.salary AS Salary FROM roles JOIN departments ON departments.id = roles.department_id;`);
-            console.log("Roles fetched from DB:", results);
             return results;
         } catch (error) {
             throw new Error('Failed to retrieve roles');
@@ -84,7 +83,6 @@ class DatabaseQueries {
     }
     // db query for updating an employee role
     async updateRole(employeeID, newRoleID) {
-        console.log("Updating role for employee ID:", employeeID, "New Role ID:", newRoleID);
         try {
             const [results] = await this.connect.query(`UPDATE employees SET role_id = ? WHERE id = ?`, [newRoleID, employeeID])
         } catch (error) {
