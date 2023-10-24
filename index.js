@@ -188,7 +188,39 @@ async function userPrompt() {
                 await db.addEmployee(answers);
                 console.log(`Employee ${answers.first_name} ${answers.last_name} added successfully!`);
                 break;
-
+            // User selects Update an employee role
+            case 'Update an employee role':
+                const allEmployees = await db.viewAllEmployees();
+                const employeeChoice = allEmployees.map(employees => ({
+                    name: employees.Employee,
+                    value: employees["Employee ID"]
+                }));
+                const rolesForUpdate = await db.viewAllRoles();
+                console.log('Roles for update:', rolesForUpdate);
+                const roleUpdateChoices = rolesForUpdate.map(roles => {
+                    return {
+                        name: roles['Title'],
+                        value: roles['Role ID']
+                    }
+                })
+                const { employeeID, newRoleID } = await inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'employeeID',
+                        message: `Which employee's role do you want to change?`,
+                        choices: employeeChoice
+                    },
+                    {
+                        type: 'list',
+                        name: 'newRoleID',
+                        message: `Which role would you like to assign to the selected employee?`,
+                        choices: roleUpdateChoices
+                    }
+                ])
+                console.log("Selected Employee ID:", employeeID, "Selected New Role ID:", newRoleID);
+                await db.updateRole(employeeID, newRoleID);
+                console.log(`Updated employee's role successfully`);
+                break;
             // User selects Exit
             case 'Exit':
                 await db.connect.end();
