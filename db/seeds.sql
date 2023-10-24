@@ -1,4 +1,4 @@
--- Insert initial departments
+-- Seed initial departments
 INSERT INTO departments (dept_name) VALUES
     ('Astro-Logistics'),
     ('Quantum Computing'),
@@ -11,7 +11,7 @@ INSERT INTO departments (dept_name) VALUES
     ('Virtual Realities'),
     ('Zero-Energy Systems');
 
--- Insert initial roles
+-- Seed initial roles
 INSERT INTO roles (title, salary, department_id) VALUES
     ('Astro-Logistics Officer', 92000.00, 1),
     ('Quantum Programmer', 105000.00, 2),
@@ -24,7 +24,7 @@ INSERT INTO roles (title, salary, department_id) VALUES
     ('Virtual World Architect', 90000.00, 9),
     ('Zero-Energy Innovator', 115000.00, 10);
 
--- Insert initial employees
+-- Seed initial employees
 INSERT INTO employees (first_name, last_name, manager_id, role_id) VALUES
    ('Aria', 'Martinez', NULL, 1),
     ('Dylan', 'Roberts', NULL, 2),
