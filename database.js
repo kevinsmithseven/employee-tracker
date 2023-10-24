@@ -39,17 +39,17 @@ class DatabaseQueries {
         };
     };
     // db query for adding a department
-    async addDepartment(dept_name) {
+    async addDepartment(dept) {
         try {
-            const [results] = await this.connect.query(`INSERT INTO departments (dept_name) VALUES (?)`, [dept_name]);
+            const [results] = await this.connect.query(`INSERT INTO departments SET ?`, dept);
         } catch (error) {
             throw new Error('Failed to add department')
         }
     }
     // db query for adding a role
-    async addRole(title, salary, department_id) {
+    async addRole(role) {
         try {
-            const [results] = await this.connect.query(`INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`, [title, salary, department_id]);
+            const [results] = await this.connect.query(`INSERT INTO roles SET ?`, role);
         } catch (error) {
             throw new Error('Failed to add role')
         }

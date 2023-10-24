@@ -69,7 +69,7 @@ async function userPrompt() {
                 break;
             // User selects Add a department    
             case 'Add a department':
-                const { dept_name } = await inquirer.prompt([
+                const dept = await inquirer.prompt([
                     {
                         type: 'input',
                         name: 'dept_name',
@@ -85,8 +85,8 @@ async function userPrompt() {
                     }
                 ]);
 
-                await db.addDepartment(dept_name);
-                console.log(`${dept_name} added successfully!`);
+                await db.addDepartment(dept);
+                console.log(`${dept.dept_name} added successfully!`);
                 await userPrompt();
                 break;
             // User selects Add a role    
@@ -96,7 +96,7 @@ async function userPrompt() {
                     name: dept.dept_name,
                     value: dept.id
                 }));
-                const { title, salary, department_id } = await inquirer.prompt([
+                const role = await inquirer.prompt([
                     {
                         type: 'input',
                         name: 'title',
@@ -132,8 +132,8 @@ async function userPrompt() {
                     }
                 ]);
 
-                await db.addRole(title, salary, department_id);
-                console.log(`${title} added successfully!`);
+                await db.addRole(role);
+                console.log(`${role.title} added successfully!`);
                 await userPrompt();
                 break;
             // User selects Add an employee
