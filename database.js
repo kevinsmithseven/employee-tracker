@@ -32,7 +32,6 @@ class DatabaseQueries {
     async viewAllEmployees() {
         try {
             const [results] = await this.connect.query(`SELECT employees.id AS "Employee ID", CONCAT(employees.first_name, " ", employees.last_name) AS "Employee", roles.title AS "Title", departments.dept_name AS "Dept Name", roles.salary AS "Salary", employees.manager_id AS "Manager" FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.department_id = departments.id;`);
-            // TODO: Update to show manager name
             return results;
         } catch (error) {
             throw new Error('Failed to retrieve employees');
@@ -64,11 +63,10 @@ class DatabaseQueries {
         }
     }
     // db query for adding an employee
-    // TODO update with manager ID
     async addEmployee(employee) {
         try {
-           const [results] =  await this.connect.query(`INSERT INTO employees SET ?`, employee);
-           return true;
+            const [results] = await this.connect.query(`INSERT INTO employees SET ?`, employee);
+            return true;
         } catch (error) {
             throw new Error('Failed to add employee')
         }
@@ -83,7 +81,7 @@ class DatabaseQueries {
             throw new Error('Failed to retrieve role titles and ids')
         }
     }
-    // TODO db query for getting managers from employees table
+    
 
 };
 
