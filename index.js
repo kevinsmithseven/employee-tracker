@@ -53,19 +53,16 @@ async function userPrompt() {
             case 'View all departments':
                 const departments = await db.viewAllDepartments();
                 console.table(departments);
-                await userPrompt();
                 break;
             // User selects View all roles
             case 'View all roles':
                 const roles = await db.viewAllRoles();
                 console.table(roles);
-                await userPrompt();
                 break;
             // User selects View all employees
             case 'View all employees':
                 const employees = await db.viewAllEmployees();
                 console.table(employees);
-                await userPrompt();
                 break;
             // User selects Add a department    
             case 'Add a department':
@@ -87,7 +84,6 @@ async function userPrompt() {
 
                 await db.addDepartment(dept);
                 console.log(`${dept.dept_name} added successfully!`);
-                await userPrompt();
                 break;
             // User selects Add a role    
             case 'Add a role':
@@ -134,7 +130,6 @@ async function userPrompt() {
 
                 await db.addRole(role);
                 console.log(`${role.title} added successfully!`);
-                await userPrompt();
                 break;
             // User selects Add an employee
             case 'Add an employee':
@@ -192,14 +187,15 @@ async function userPrompt() {
                 ])
                 await db.addEmployee(answers);
                 console.log(`Employee ${answers.first_name} ${answers.last_name} added successfully!`);
-                await userPrompt();
                 break;
 
             // User selects Exit
             case 'Exit':
                 await db.connect.end();
-                break;
+                return;
         }
+
+        await userPrompt();
 
 
     } catch (error) {
