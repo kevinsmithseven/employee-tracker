@@ -33,7 +33,7 @@ const db = new DatabaseQueries(
         // MySQL username
         user: 'root',
         // MySQL password
-        password: 'rootroot',
+        password: '',
         database: 'employee_db'
     },
 );

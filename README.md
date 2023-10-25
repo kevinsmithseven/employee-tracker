@@ -9,7 +9,7 @@ A command-line application utilizing Node.js, Inquirer, and MySQL for managing a
 To use this application, the user will need to clone the code to their local machine, run a "npm install" to install the required packages, and using MySQL, SOURCE the db/schema.sql and db/seeds.sql files, making any changes to the db/seeds.sql file seed data that are needed. I have provided some initial example seed data as a start. Once this is complete, running the command "node index.js" will start the application. The user will be presented with several choices to interact with the database. Using the arrow keys, the user can cycle between the various choices and hit enter to make a selection. When the user is ready to exit the application, they can scroll to the "Exit" choice and hit enter to quit and be brought back to the CLI.
 
 Link to demonstration video:
-[Employee Tracker Demo Video](https://salty-sands-14541-496b51c248e5.herokuapp.com/)
+[Employee Tracker Demo Video](https://drive.google.com/file/d/1hiwjt3Ru4Zg-Cl2XyI-fJPfHGVWPZU_L/view)
 
 Screenshot of the application:
 
