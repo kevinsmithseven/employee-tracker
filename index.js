@@ -2,6 +2,29 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const DatabaseQueries = require('./database.js');
+const titleGraphic = () => console.log(`
+
+.----------------------------------------------------------------.
+|                                                                |
+|  _____                       _                                 |
+| | ____|  _ __ ___    _ __   | |   ___    _   _    ___    ___   |
+| |  _|   | '_ \` _ \\  | '_ \\  | |  / _ \\  | | | |  / _ \\  / _ \\  |
+| | |___  | | | | | | | |_) | | | | (_) | | |_| | |  __/ |  __/  |
+| |_____| |_| |_| |_| | .__/  |_|  \\___/   \\__, |  \\___|  \\___|  |
+|                     |_|                  |___/                 |
+|  __  __                                                        |
+| |  \\/  |   __ _   _ __     __ _    __ _    ___   _ __          |
+| | |\\/| |  / _\` | | '_ \\   / _\` |  / _\` |  / _ \\ | '__|         |
+| | |  | | | (_| | | | | | | (_| | | (_| | |  __/ | |            |
+| |_|  |_|  \\__,_| |_| |_|  \\__,_|  \\__, |  \\___| |_|            |
+|                                   |___/                        |
+|                                                                |
+'----------------------------------------------------------------'
+
+`);
+
+// display title art
+titleGraphic();
 
 // Create new DataBaseQueries instance
 const db = new DatabaseQueries(
@@ -18,8 +41,7 @@ const db = new DatabaseQueries(
 // Function for all user prompting and selections
 async function userPrompt() {
     await db.createConnection();
-    console.log(`Connected to the employee_db database.`)
-
+        
     try {
         // Choices available to user in a list
         const userRequest = await inquirer.prompt([
