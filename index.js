@@ -57,13 +57,13 @@ async function userPrompt() {
                     'Add a role',
                     'Add an employee',
                     'Update an employee role',
-                    // 'Delete a department',
-                    // 'Delete a role',
-                    // 'Delete an employee',
-                    // 'View employees by manager',
-                    // 'Update an employee manager',
-                    // 'View employees by department,
-                    // 'View total budget of a department',
+                    // 'Delete a department', future enhancement
+                    // 'Delete a role', future enhancement
+                    // 'Delete an employee', future enhancement
+                    // 'View employees by manager', future enhancement
+                    // 'Update an employee manager', future enhancement
+                    // 'View employees by department, future enhancement
+                    // 'View total budget of a department', future enhancement
                     'Exit',
                 ]
             }
