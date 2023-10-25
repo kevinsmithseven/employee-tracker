@@ -31,7 +31,7 @@ class DatabaseQueries {
     // db query for viewing all employees
     async viewAllEmployees() {
         try {
-            const [results] = await this.connect.query(`SELECT employees.id AS "Employee ID", CONCAT(employees.first_name, " ", employees.last_name) AS "Employee", roles.title AS "Title", departments.dept_name AS "Dept Name", roles.salary AS "Salary", employees.manager_id AS "Manager" FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.department_id = departments.id;`);
+            const [results] = await this.connect.query(`SELECT employees.id AS "Employee ID", CONCAT(employees.first_name, " ", employees.last_name) AS "Employee", roles.title AS "Title", departments.dept_name AS "Dept Name",roles.salary AS "Salary", CONCAT(manager.first_name, " ", manager.last_name) AS "Manager" FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.department_id = departments.id LEFT JOIN employees AS manager ON employees.manager_id = manager.id;`);
             return results;
         } catch (error) {
             throw new Error('Failed to retrieve employees');
